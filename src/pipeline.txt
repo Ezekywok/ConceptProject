@@ -1,0 +1,6 @@
+get structure reading done
+assign to objects properly
+create visual interface
+	(affix to refresh rate of game)
+combo
+accuracy
