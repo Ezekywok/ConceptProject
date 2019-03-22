@@ -1,4 +1,7 @@
 TITLE
+LENGTH OF SONG
+-------------- (This section will have unspecified length) (Will probably be handled differently)
 NOTE LOCATION
 TIMING 1
 TIMING 2 (IF TIMING 1 AND 2 ARE THE SAME, HITNOTE INSTEAD OF SLIDER)
+--------------
