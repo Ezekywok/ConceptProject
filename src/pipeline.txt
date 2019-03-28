@@ -1,6 +1,7 @@
-get structure reading done
-assign to objects properly
-create visual interface
+get structure reading done - done
+assign to objects properly - done
+create visual interface - wip
 	(affix to refresh rate of game)
+get simultaneous key inputs working (array of size 4, all default 0)(keyPressed sets it to 1, keyReleased sets it back to 0)
 combo
 accuracy
