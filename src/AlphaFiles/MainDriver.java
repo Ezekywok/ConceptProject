@@ -9,11 +9,11 @@ public class MainDriver {
         {
             try {
                 song1 = new SongAssignAlpha();
+                System.out.println(song1);
             } catch (IOException e) {
                 e.printStackTrace();
             }
         }
-        ArrayList<Notes> beans = song1.getTimings();
     }
 
 
