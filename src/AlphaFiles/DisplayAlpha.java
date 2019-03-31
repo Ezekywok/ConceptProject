@@ -6,18 +6,29 @@ import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
+import java.io.IOException;
+import java.util.ArrayList;
 import javax.swing.JComponent;
 import javax.swing.JFrame;
 
 public class DisplayAlpha extends JComponent implements KeyListener, MouseListener, MouseMotionListener {
     //instance variables
+    private final int ticks = 60;
+
+    private int scrollSpeed = 4;
+
     private int WIDTH;
     private int HEIGHT;
 
     private boolean[] keyPress = new boolean[4];
 
+    private SongAssignAlpha notes = new SongAssignAlpha();
+
+    //delete this later (test global vars)
+    int[] x,y,width,height;
+
     //Default Constructor
-    public DisplayAlpha() {
+    public DisplayAlpha() throws IOException {
         Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
         //initializing instance variables
         WIDTH = screenSize.width;
@@ -39,28 +50,45 @@ public class DisplayAlpha extends JComponent implements KeyListener, MouseListen
         gui.addKeyListener(this);//stating that this object will listen to the keyboard
         gui.addMouseListener(this);//stating that this object will listen to the Mouse
         gui.addMouseMotionListener(this);//stating that this object will acknowledge when the Mouse moves
+
     }
 
     //This method will acknowledge user input
     public void keyPressed(KeyEvent e) {
         //getting the key pressed
         //moving the rectangle
+        int key = e.getKeyCode();
+        if(key == 68){ //d
+            keyPress[0] = true;
+        }
+        if(key == 70){ //f
+            keyPress[1] = true;
+        }
+        if(key == 74){ //j
+            keyPress[2] = true;
+        }
+        if(key == 75){ //k
+            keyPress[3] = true;
+        }
+
     }
 
     //All your UI drawing goes in here
     public void paintComponent(Graphics g) {
-        //Drawing a Blue Rectangle to be the background
-        //Drawing Hello World!! at the center of the GUI
-        //Drawing the user-controlled rectangle
-        //Drawing the autonomous circle
-
+        for(int i = 0;i<notes.noteArraySize();i++){
+            notes.getNote(i).drawSelf(g);
+        }
     }
+
 
     public void loop() {
         //making the autonomous circle move
         //handling when the circle collides with the edges
         //handling the collision of the circle with the rectangle
         //Do not write below this
+        for(int i = 0;i<notes.noteArraySize();i++){
+            notes.getNote(i).scrollNote();
+        }
         repaint();
     }
 
@@ -70,6 +98,20 @@ public class DisplayAlpha extends JComponent implements KeyListener, MouseListen
     }
 
     public void keyReleased(KeyEvent e) {
+        int key = e.getKeyCode();
+        if(key == 68){
+            keyPress[0] = false;
+        }
+        if(key == 70){
+            keyPress[1] = false;
+        }
+        if(key == 74){
+            keyPress[2] = false;
+        }
+        if(key == 75){
+            keyPress[3] = false;
+        }
+
     }
 
     public void mousePressed(MouseEvent e) {
@@ -93,7 +135,7 @@ public class DisplayAlpha extends JComponent implements KeyListener, MouseListen
     public void mouseDragged(MouseEvent e) {
     }
 
-    public void start(final int ticks) {
+    public void start() {
         Thread gameThread = new Thread() {
             public void run() {
                 while (true) {
@@ -109,8 +151,8 @@ public class DisplayAlpha extends JComponent implements KeyListener, MouseListen
         gameThread.start();
     }
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws java.io.IOException{
         DisplayAlpha g = new DisplayAlpha();
-        g.start(60);
+        g.start();
     }
 }
