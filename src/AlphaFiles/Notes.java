@@ -9,6 +9,8 @@ public class Notes {
 
     private int x, y, width, height;
 
+    private int scrollSpeed = 4;
+
     public Notes() {
         tag = "hitnote";
         location = -1;
@@ -19,17 +21,17 @@ public class Notes {
     public Notes(int loc, double times1, double times2) {
         Dimension screen = Toolkit.getDefaultToolkit().getScreenSize();
         int screenHeight = screen.height;
-        int noteLen = 0;
+        double noteLen = 0;
         if (times1 == times2) {
             tag = "hitnote";
-            noteLen = 1;
+            noteLen = 0.2;
         } else {
             tag = "slider";
-            noteLen = (int)(times2-times1);
+            noteLen = times2 - times1;
         }
         location = loc; //possibly deprecated
-        sig1 = times1;
-        sig2 = times2;
+        sig1 = times1; //possibly deprecated
+        sig2 = times2; //possibly deprecated
 
         if (loc == 0) {
             x = (int) (screen.width * .25);
@@ -39,13 +41,13 @@ public class Notes {
             x = (int) (screen.width * .25 + (screen.width * .05) * 2 + 5);
         } else if (loc == 3) {
             x = (int) (screen.width * .25 + (screen.width * .05) * 3 + 5);
-        }else
+        } else
             x = 0;
 
-        y = -(int) (noteLen * 60 + screenHeight);//multiply by scrollSpeed in DisplayAlpha
+        y = -(int) (times1 * 60);
 
         width = (int) (screen.width * .05);
-        height = (int) ( noteLen * 60 + screenHeight);//multiply by scrollSpeed in DisplayAlpha
+        height = (int) (noteLen * scrollSpeed * 60)-screenHeight;
     }
 
     public void drawSelf(Graphics g) {
@@ -61,9 +63,14 @@ public class Notes {
         g.fillRect(x, y, width, height);
     }
 
-    public void scrollNote(){
-        y = y+4;
+    public void scrollNote() {
+        y = y + scrollSpeed;
     }
+
+    public int getY(){
+        return y;
+    }
+
     public String toString() {
         return "tag: " + tag + "\nlocation: " + location + "\nsig1: " + sig1 + "\nsig2: " + sig2;
     }

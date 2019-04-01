@@ -43,6 +43,7 @@ public class SongAssignAlpha {
     public Notes getNote(int ref){
         return timings.get(ref);
     }
+
     public String toString() {
         String output = "title: " + title + "\nsonglength: " + songlength + "\n\n";
         output += timings.size()+"\n\n";
