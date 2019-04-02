@@ -27,7 +27,7 @@ public class DisplayAlpha extends JComponent implements KeyListener, MouseListen
     //delete this later (test global vars)
     int[] x,y,width,height;
 
-    private double currentRuntime = 0;
+    private int currentRuntime = 0;
 
     //Default Constructor
     public DisplayAlpha() throws IOException {
@@ -78,14 +78,14 @@ public class DisplayAlpha extends JComponent implements KeyListener, MouseListen
     //All your UI drawing goes in here
     public void paintComponent(Graphics g) {
         for(int i = 0;i<notes.noteArraySize();i++){
-            if(notes.getNote(i).getY() <= HEIGHT){
+            if(notes.getNote(i).getY()-notes.getNote(i).getHeight() <= HEIGHT){
                 notes.getNote(i).drawSelf(g);
             }
         }
         Font timeFont = new Font("Comic Sans MS",Font.PLAIN,20);
         g.setFont(timeFont);
         g.setColor(Color.BLACK);
-        g.drawString((""+(float)(currentRuntime/60)).substring(0,4),5,(int)(HEIGHT*.95));
+        g.drawString(""+(currentRuntime),5,(int)(HEIGHT*.95));
     }
 
 

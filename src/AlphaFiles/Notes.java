@@ -24,7 +24,7 @@ public class Notes {
         double noteLen = 0;
         if (times1 == times2) {
             tag = "hitnote";
-            noteLen = 0.2;
+            noteLen = 0.1;
         } else {
             tag = "slider";
             noteLen = times2 - times1;
@@ -44,10 +44,10 @@ public class Notes {
         } else
             x = 0;
 
-        y = -(int) (times1 * 60);
+        y = 0;//-(int) (times1 * 60);
 
         width = (int) (screen.width * .05);
-        height = (int) (noteLen * scrollSpeed * 60)-screenHeight;
+        height = (int) (noteLen * scrollSpeed * 60);
     }
 
     public void drawSelf(Graphics g) {
@@ -60,7 +60,7 @@ public class Notes {
         } else if (location == 3) {
             g.setColor(Color.GREEN);
         }
-        g.fillRect(x, y, width, height);
+        g.fillRect(x, y-height, width, height);
     }
 
     public void scrollNote() {
@@ -69,6 +69,10 @@ public class Notes {
 
     public int getY(){
         return y;
+    }
+
+    public int getHeight(){
+        return height;
     }
 
     public String toString() {
