@@ -22,6 +22,12 @@ public class DisplayAlpha extends JComponent implements KeyListener, MouseListen
 
     private boolean[] keyPress = new boolean[4];
 
+    //declare values to these please thx man
+    private int[] hitzoneX = new int[4];
+    private int[] hitzoneY = new int[4];
+    private int[] hitzoneWidth = new int[4];
+    private int[] hitzoneHeight = new int[4];
+
     private SongAssignAlpha notes = new SongAssignAlpha();
 
     //delete this later (test global vars)
