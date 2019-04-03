@@ -15,19 +15,23 @@ public class SongAssignAlpha {
     public SongAssignAlpha() throws IOException {
         title = br.readLine();
         songlength = Integer.parseInt(br.readLine());
+        br.readLine();
         int counter = 0, loc = -1;
         double times1 = -1, times2 = -1;
         String str;
         while ((str = br.readLine()) != null) {
-            if (counter % 3 == 0) {
+            if (counter % 4 == 0) {
                 loc = Integer.parseInt(str);
             }
-            if (counter % 3 == 1) {
+            if (counter % 4 == 1) {
                 times1 = Double.parseDouble(str);
             }
-            if (counter % 3 == 2) {
+            if (counter % 4 == 2) {
                 times2 = Double.parseDouble(str);
                 timings.add(new Notes(loc, times1, times2));
+            }
+            if(counter % 4 == 3){
+                //do nothing, supposed to be an empty line
             }
             counter++;
         }

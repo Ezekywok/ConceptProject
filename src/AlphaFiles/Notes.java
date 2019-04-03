@@ -36,15 +36,15 @@ public class Notes {
         if (loc == 0) {
             x = (int) (screen.width * .25);
         } else if (loc == 1) {
-            x = (int) (screen.width * .25 + (screen.width * .05) + 5);
+            x = (int) (screen.width * .25 + (int)(screen.width * .05) + 5);
         } else if (loc == 2) {
-            x = (int) (screen.width * .25 + (screen.width * .05) * 2 + 5);
+            x = (int) (screen.width * .25 + (int)(screen.width * .05) * 2 + 10);
         } else if (loc == 3) {
-            x = (int) (screen.width * .25 + (screen.width * .05) * 3 + 5);
+            x = (int) (screen.width * .25 + (int)(screen.width * .05) * 3 + 15);
         } else
             x = 0;
 
-        y = 0;//-(int) (times1 * 60);
+        y = -(int) (times1 * 60) - (2 * scrollSpeed * 60);
 
         width = (int) (screen.width * .05);
         height = (int) (noteLen * scrollSpeed * 60);
