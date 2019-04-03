@@ -47,7 +47,11 @@ public class Notes {
         y = -(int) (times1 * 60) - (2 * scrollSpeed * 60);
 
         width = (int) (screen.width * .05);
-        height = (int) (noteLen * scrollSpeed * 60);
+        if(tag.equals("slider")){
+            height = (int) (noteLen * scrollSpeed * 60);
+        }else
+            height = (int) (0.1 * 4 * 60);
+
     }
 
     public void drawSelf(Graphics g) {
