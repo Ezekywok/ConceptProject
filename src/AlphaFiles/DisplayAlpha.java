@@ -20,11 +20,8 @@ public class DisplayAlpha extends JComponent implements KeyListener, MouseListen
 
     private boolean[] keyPress = new boolean[4];
 
-    //declare values to these please thx man
     private int[] hitzoneX;
-    private int[] hitzoneY = new int[4];
-    private int[] hitzoneWidth = new int[4];
-    private int[] hitzoneHeight = new int[4];
+    Hitzone hitzones = new Hitzone();
 
     private SongAssignAlpha notes = new SongAssignAlpha();
 
@@ -99,12 +96,6 @@ public class DisplayAlpha extends JComponent implements KeyListener, MouseListen
                 (int) (WIDTH * .25 + (int) (WIDTH * .05) * 3 + 15)
         };
 
-        //colors of zones
-        Color Zone300 = new Color(255, 255, 0, 120);
-        Color Zone200 = new Color(0, 255, 0, 120);
-        Color Zone100 = new Color(0, 0, 255, 120);
-        Color ZoneMiss = new Color(255, 0, 0, 120);
-
         //area where you hit notes
         for (int i = 0; i < hitzoneX.length; i++) {
             g.setColor(Color.CYAN);
@@ -115,26 +106,12 @@ public class DisplayAlpha extends JComponent implements KeyListener, MouseListen
             } else {
                 g.setColor(new Color(0, 255, 255, 50));
             }
+
             g.fillRect(hitzoneX[i], (int) (HEIGHT * .80), (int) (WIDTH * .05), (int) (HEIGHT * .125));
-
-            //zone for a 300
-            g.setColor(Zone300);
-            g.fillRect(hitzoneX[i], (int) (HEIGHT * .80) - (int) (HEIGHT * .03125), (int) (WIDTH * .05), (int) (HEIGHT * .03125));
-
-            //zone for a 200
-            g.setColor(Zone200);
-            g.fillRect(hitzoneX[i], (int) (HEIGHT * .80) - (int) (HEIGHT * .0625), (int) (WIDTH * .05), (int) (HEIGHT * .03125));
-
-            //zone for a 100
-            g.setColor(Zone100);
-            g.fillRect(hitzoneX[i], (int) (HEIGHT * .80) - (int) (HEIGHT * .09375), (int) (WIDTH * .05), (int) (HEIGHT * .03125));
-
-            //zone for a miss
-            g.setColor(ZoneMiss);
-            g.fillRect(hitzoneX[i], (int) (HEIGHT * .80) - (int) (HEIGHT * .125), (int) (WIDTH * .05), (int) (HEIGHT * .03125));
-
         }
 
+        hitzones.setAlpha(0);//comment this out to make it visible again
+        hitzones.drawSelf(g);
 
     }
 

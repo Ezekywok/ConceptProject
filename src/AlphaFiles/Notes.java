@@ -71,12 +71,20 @@ public class Notes {
         y = y + scrollSpeed;
     }
 
+    public int getLocation(){
+        return location;
+    }
+
     public int getY(){
         return y;
     }
 
     public int getHeight(){
         return height;
+    }
+
+    public int getBottomCoord(){
+        return getY()+getHeight();
     }
 
     public String toString() {
