@@ -36,20 +36,20 @@ public class Notes {
         if (loc == 0) {
             x = (int) (screen.width * .25);
         } else if (loc == 1) {
-            x = (int) (screen.width * .25 + (int)(screen.width * .05) + 5);
+            x = (int) (screen.width * .25 + (int) (screen.width * .05) + 5);
         } else if (loc == 2) {
-            x = (int) (screen.width * .25 + (int)(screen.width * .05) * 2 + 10);
+            x = (int) (screen.width * .25 + (int) (screen.width * .05) * 2 + 10);
         } else if (loc == 3) {
-            x = (int) (screen.width * .25 + (int)(screen.width * .05) * 3 + 15);
+            x = (int) (screen.width * .25 + (int) (screen.width * .05) * 3 + 15);
         } else
             x = 0;
 
         y = -(int) (times1 * 60) - (2 * scrollSpeed * 60);
 
         width = (int) (screen.width * .05);
-        if(tag.equals("slider")){
+        if (tag.equals("slider")) {
             height = (int) (noteLen * scrollSpeed * 60);
-        }else
+        } else
             height = (int) (0.1 * 4 * 60);
 
     }
@@ -64,27 +64,31 @@ public class Notes {
         } else if (location == 3) {
             g.setColor(Color.GREEN);
         }
-        g.fillRect(x, y-height, width, height);
+        g.fillRect(x, y - height, width, height);
+    }
+
+    public void begoneThot(){
+        height = 0;
     }
 
     public void scrollNote() {
         y = y + scrollSpeed;
     }
 
-    public int getLocation(){
+    public int getLocation() {
         return location;
     }
 
-    public int getY(){
+    public int getY() {
         return y;
     }
 
-    public int getHeight(){
+    public int getHeight() {
         return height;
     }
 
-    public int getBottomCoord(){
-        return getY()+getHeight();
+    public int getBottomCoord() {
+        return getY() + getHeight();
     }
 
     public String toString() {

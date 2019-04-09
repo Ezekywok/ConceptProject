@@ -4,7 +4,7 @@ import java.awt.*;
 
 public class Hitzone {
     private int[] hitzoneX;
-    private int hitzoneY;//hitzone Y has too many variations smh :/
+    private int[] hitzoneY;//hitzone Y has too many variations smh :/
     private int hitzoneWidth;
     private int hitzoneHeight;
 
@@ -25,7 +25,15 @@ public class Hitzone {
                 (int) (WIDTH * .25 + (int) (WIDTH * .05) * 2 + 10),
                 (int) (WIDTH * .25 + (int) (WIDTH * .05) * 3 + 15)
         };
-        hitzoneY = (int) (HEIGHT * .80);
+        int Yconstant = (int) (HEIGHT * .80);
+        hitzoneY = new int[]{
+                Yconstant - (int) (HEIGHT * .03125),
+                Yconstant - (int) (HEIGHT * .0625),
+                Yconstant,
+                Yconstant - (int) (HEIGHT * .09375),
+                Yconstant + (int) (HEIGHT * .03125),
+                Yconstant - (int) (HEIGHT * .125)
+        };
         hitzoneWidth = (int) (WIDTH * .05);
         hitzoneHeight = (int) (HEIGHT * .03125);
     }
@@ -34,21 +42,21 @@ public class Hitzone {
         for(int i = 0;i<hitzoneX.length;i++){
             //zone for a 300
             g.setColor(Zone300);
-            g.fillRect(hitzoneX[i], hitzoneY - (int) (HEIGHT * .03125), hitzoneWidth, hitzoneHeight);
+            g.fillRect(hitzoneX[i], hitzoneY[0] , hitzoneWidth, hitzoneHeight);
 
             //zone for a 200
             g.setColor(Zone200);
-            g.fillRect(hitzoneX[i], hitzoneY - (int) (HEIGHT * .0625), hitzoneWidth, hitzoneHeight);
-            g.fillRect(hitzoneX[i], hitzoneY, hitzoneWidth, hitzoneHeight);
+            g.fillRect(hitzoneX[i], hitzoneY[1] , hitzoneWidth, hitzoneHeight);
+            g.fillRect(hitzoneX[i], hitzoneY[2], hitzoneWidth, hitzoneHeight);
 
             //zone for a 100
             g.setColor(Zone100);
-            g.fillRect(hitzoneX[i], hitzoneY - (int) (HEIGHT * .09375), hitzoneWidth, hitzoneHeight);
-            g.fillRect(hitzoneX[i], hitzoneY + (int) (HEIGHT * .03125), hitzoneWidth, hitzoneHeight);
+            g.fillRect(hitzoneX[i], hitzoneY[3], hitzoneWidth, hitzoneHeight);
+            g.fillRect(hitzoneX[i], hitzoneY[4], hitzoneWidth, hitzoneHeight);
 
             //zone for a miss
             g.setColor(ZoneMiss);
-            g.fillRect(hitzoneX[i], hitzoneY - (int) (HEIGHT * .125), hitzoneWidth, hitzoneHeight);
+            g.fillRect(hitzoneX[i], hitzoneY[5], hitzoneWidth, hitzoneHeight);
             //if it goes off the screen then miss dat boi
         }
     }
@@ -60,9 +68,16 @@ public class Hitzone {
         ZoneMiss = new Color(255, 0, 0, alpha);
     }
 
-    public void checkNoteCollide(Notes note){ //int or boolean?
-        int noteLocation = note.getLocation();
-        int noteCoord = note.getBottomCoord();
-
+    public int NoteRemove (Notes note){ //int or boolean?
+        for(int i = 0;i<hitzoneX.length;i++){
+            if(hitzoneX[i] == note.getLocation()){
+                for(int j = 0;j<hitzoneY.length;j++){
+                    if(note.getBottomCoord() >= hitzoneY[j] && note.getBottomCoord() <= hitzoneY[j]+hitzoneHeight){
+                        note.begoneThot();
+                    }
+                }
+            }
+        }
+        return -1;
     }
 }

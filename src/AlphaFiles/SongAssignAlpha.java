@@ -39,6 +39,11 @@ public class SongAssignAlpha {
         }
     }
 
+    //special methods
+    public void begoneThot(Notes note){
+        timings.remove(note);
+    }
+
     //get methods
     public ArrayList<Notes> getTimings() {
         return timings;
