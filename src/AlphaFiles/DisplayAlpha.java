@@ -110,7 +110,7 @@ public class DisplayAlpha extends JComponent implements KeyListener, MouseListen
             g.fillRect(hitzoneX[i], (int) (HEIGHT * .80), (int) (WIDTH * .05), (int) (HEIGHT * .125));
         }
 
-        hitzones.setAlpha(0);//comment this out to make it visible again
+        hitzones.setAlpha(50);//comment this out to make it visible again
         hitzones.drawSelf(g);
 
     }
@@ -123,6 +123,22 @@ public class DisplayAlpha extends JComponent implements KeyListener, MouseListen
         //Do not write below this
         for (int i = 0; i < notes.noteArraySize(); i++) {
             notes.getNote(i).scrollNote();
+        }
+        if(keyPress[0]){
+            keyPress[0] = false;
+            System.out.println(hitzones.NoteRemove(0));
+        }
+        if(keyPress[1]){
+            keyPress[0] = false;
+            System.out.println(hitzones.NoteRemove(1));
+        }
+        if(keyPress[2]){
+            keyPress[0] = false;
+            System.out.println(hitzones.NoteRemove(2));
+        }
+        if(keyPress[3]){
+            keyPress[0] = false;
+            System.out.println(hitzones.NoteRemove(3));
         }
         currentRuntime = currentRuntime + 1000 / 60;
         repaint();
@@ -191,4 +207,5 @@ public class DisplayAlpha extends JComponent implements KeyListener, MouseListen
         DisplayAlpha g = new DisplayAlpha();
         g.start();
     }
+
 }

@@ -1,8 +1,9 @@
 package AlphaFiles;
 
 import java.awt.*;
+import java.io.IOException;
 
-public class Hitzone {
+public class Hitzone extends SongAssignAlpha{
     private int[] hitzoneX;
     private int[] hitzoneY;//hitzone Y has too many variations smh :/
     private int hitzoneWidth;
@@ -18,7 +19,7 @@ public class Hitzone {
     Color Zone100 = new Color(0, 0, 255, 50);
     Color ZoneMiss = new Color(255, 0, 0, 50);
 
-    public Hitzone(){
+    public Hitzone () throws IOException{
         hitzoneX = new int[]{
                 (int) (WIDTH * .25),
                 (int) (WIDTH * .25 + (int) (WIDTH * .05) + 5),
@@ -68,15 +69,37 @@ public class Hitzone {
         ZoneMiss = new Color(255, 0, 0, alpha);
     }
 
-    public int NoteRemove (Notes note){ //int or boolean?
-        for(int i = 0;i<hitzoneX.length;i++){
-            if(hitzoneX[i] == note.getLocation()){
-                for(int j = 0;j<hitzoneY.length;j++){
-                    if(note.getBottomCoord() >= hitzoneY[j] && note.getBottomCoord() <= hitzoneY[j]+hitzoneHeight){
-                        note.begoneThot();
-                    }
-                }
+    public boolean inside300(int yCoord){
+        return yCoord >= hitzoneY[0] && yCoord <= hitzoneY[0]+hitzoneHeight;
+    }
+
+    public boolean inside200(int yCoord){
+        return (yCoord >= hitzoneY[1] && yCoord <= hitzoneY[1]+hitzoneHeight) || (yCoord >= hitzoneY[2] && yCoord <= hitzoneY[2]+hitzoneHeight);
+    }
+
+    public boolean inside100(int yCoord){
+        return (yCoord >= hitzoneY[3] && yCoord <= hitzoneY[3]+hitzoneHeight) || (yCoord >= hitzoneY[4] && yCoord <= hitzoneY[4]+hitzoneHeight);
+    }
+
+    public boolean insideMiss(int yCoord){
+        return (yCoord >= hitzoneY[5] && yCoord <= hitzoneY[5]+hitzoneHeight) || (yCoord > hitzoneY[4]+hitzoneHeight);
+    }
+
+    public int NoteRemove (int refZone){
+        for(int i = 0;i<getTimings().size();i++){
+            if(getNote(i).getLocation() == refZone){
+                int bottomYCoord = getNote(i).getBottomCoord();
+                System.out.println("Bottom Coord:" + bottomYCoord);
+                if(inside300(bottomYCoord)){
+                    return 300;
+                }else if(inside200(bottomYCoord)){
+                    return 200;
+                }else if(inside100(bottomYCoord)){
+                    return 100;
+                }else
+                    return 0;
             }
+            break;
         }
         return -1;
     }

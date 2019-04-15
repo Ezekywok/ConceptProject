@@ -68,7 +68,7 @@ public class Notes {
     }
 
     public void begoneThot(){
-        height = 0;
+
     }
 
     public void scrollNote() {
@@ -88,7 +88,7 @@ public class Notes {
     }
 
     public int getBottomCoord() {
-        return getY() + getHeight();
+        return getY();
     }
 
     public String toString() {
